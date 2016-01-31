@@ -9,7 +9,7 @@ var get$ = Ember.get;
 
 DS.Store.reopen(StoreMixin);
 
-export function initialize(container, application) {
+export function initialize(application) {
   var methods, minLevel, shouldLog;
   methods = {};
   minLevel = get$(application, 'SAILS_LOG_LEVEL');
