@@ -9,6 +9,8 @@ var run = Ember.run;
 var bind = run.bind;
 var debounce = run.debounce;
 
+const { getOwner } = Ember;
+
 /**
  * Adapter for SailsJS sockets
  *
@@ -170,7 +172,7 @@ export default SailsBaseAdapter.extend({
     var socket = this.sailsSocket;
     if (socket.listenFor(eventName, true)) {
       this.notice(fmt('setting up adapter to listen for `%@` messages', model));
-      store = this.container.lookup('store:main');
+      store = getOwner(this).lookup('store:main');
       type = store.modelFor(model);
       socket.on(eventName + '.created', bind(this, '_handleSocketRecordCreated', store, type));
       socket.on(eventName + '.updated', bind(this, '_handleSocketRecordUpdated', store, type));
